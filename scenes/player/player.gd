@@ -9,7 +9,7 @@ extends CharacterBody3D
 
 @onready var camera = $Node/Camera3D
 @onready var camera_height = camera.global_position.y
-@onready var hand = $Node/Hand
+@onready var hand = $Hand
 @onready var hand_height = hand.global_position.y
 
 var mouse_world_position: Vector3

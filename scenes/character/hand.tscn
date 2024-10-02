@@ -14,6 +14,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.7)
 script = ExtResource("1_im4tj")
 min_distance = 0.7
 max_distance = 1.2
+height = 1.0
 
 [node name="HandMesh" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_rpruh")
