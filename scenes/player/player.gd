@@ -12,8 +12,7 @@ extends CharacterBody3D
 @onready var hand = $Node/Hand
 @onready var hand_height = hand.global_position.y
 
-@export var bullet_origin: Node3D
-
+var mouse_world_position: Vector3
 var mouse_relative_position: Vector2
 
 func _process(delta: float):
@@ -44,8 +43,8 @@ func look_rotation():
 	var mouse_pos: Vector2 = get_viewport().get_mouse_position()
 	var mouse_origin = camera.project_ray_origin(mouse_pos)
 	var mouse_normal = camera.project_ray_normal(mouse_pos)
-	var mouse_world_pos = mouse_origin - mouse_normal / mouse_normal.y * (camera_height - hand_height)
-	mouse_relative_position = (Vector2(mouse_world_pos.x, mouse_world_pos.z) - Vector2(global_position.x, global_position.z))
+	mouse_world_position = mouse_origin - mouse_normal / mouse_normal.y * (camera_height - hand_height)
+	mouse_relative_position = (Vector2(mouse_world_position.x, mouse_world_position.z) - Vector2(global_position.x, global_position.z))
 	var normal_rel_pos = mouse_relative_position.normalized()
 	var target = atan2(-normal_rel_pos.y, normal_rel_pos.x) - PI / 2
 	rotation.y = target
@@ -64,14 +63,11 @@ func camera_movement():
 	camera.global_position.y = camera_height
 
 func hand_movement():
-	var lerp = clampf(mouse_relative_position.length(), 0, 1)
-	var distance = lerp(min_hand_distance, max_hand_distance, lerp)
-	hand.global_position = global_position + Vector3(mouse_relative_position.x, 0, mouse_relative_position.y).normalized() * distance
-	hand.global_position.y = hand_height
-	hand.rotation.y = atan2(-mouse_relative_position.y, mouse_relative_position.x) - PI / 2
+	hand.origin = global_position
+	hand.target = mouse_world_position
 
 func shoot():
 	if Input.is_action_just_pressed("shoot"):
-		var origin = bullet_origin.global_position
-		var normal = -bullet_origin.global_basis.z
+		var origin = hand.bullet_origin.global_position
+		var normal = -hand.bullet_origin.global_basis.z
 		GameEvents.handle_shot(get_world_3d().direct_space_state, origin, normal)
