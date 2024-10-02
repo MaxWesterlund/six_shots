@@ -12,12 +12,15 @@ extends CharacterBody3D
 @onready var hand = $Node/Hand
 @onready var hand_height = hand.global_position.y
 
+@export var bullet_origin: Node3D
+
 var mouse_relative_position: Vector2
 
 func _process(delta: float):
 	look_rotation()
 	camera_movement()
 	hand_movement()
+	shoot()
 
 func _physics_process(delta: float):
 	movement(delta)
@@ -55,7 +58,7 @@ func camera_movement():
 	else:
 		camera_movement = mouse_relative_position
 	
-	camera_movement *= 0.5
+	camera_movement *= 0.4
 
 	camera.global_position = global_position + Vector3(camera_movement.x, 0, camera_movement.y)
 	camera.global_position.y = camera_height
@@ -66,3 +69,9 @@ func hand_movement():
 	hand.global_position = global_position + Vector3(mouse_relative_position.x, 0, mouse_relative_position.y).normalized() * distance
 	hand.global_position.y = hand_height
 	hand.rotation.y = atan2(-mouse_relative_position.y, mouse_relative_position.x) - PI / 2
+
+func shoot():
+	if Input.is_action_just_pressed("shoot"):
+		var origin = bullet_origin.global_position
+		var normal = -bullet_origin.global_basis.z
+		GameEvents.handle_shot(get_world_3d().direct_space_state, origin, normal)

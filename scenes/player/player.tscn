@@ -16,12 +16,13 @@ height = 0.4
 [sub_resource type="BoxMesh" id="BoxMesh_uf7mi"]
 size = Vector3(0.15, 0.1, 0.5)
 
-[node name="Player" type="CharacterBody3D"]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("bullet_origin")]
 script = ExtResource("1_n6iiy")
 move_speed = 100.0
 camera_move_distance = 5.0
 min_hand_distance = 0.7
 max_hand_distance = 1.2
+bullet_origin = NodePath("Node/Hand/GunMesh/BulletOrigin")
 
 [node name="Body" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -49,3 +50,6 @@ mesh = SubResource("SphereMesh_rpruh")
 [node name="GunMesh" type="MeshInstance3D" parent="Node/Hand"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.208783, -0.1946)
 mesh = SubResource("BoxMesh_uf7mi")
+
+[node name="BulletOrigin" type="Node3D" parent="Node/Hand/GunMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.251168)
