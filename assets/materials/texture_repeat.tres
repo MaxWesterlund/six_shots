@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://3efo5ivdi8np"]
+
+[ext_resource type="Shader" path="res://assets/shaders/texture_repeat.gdshader" id="1_mtucj"]
+[ext_resource type="Texture2D" uid="uid://b1hbnkec8yi1u" path="res://assets/proto_blue.png" id="2_rtnkc"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_mtucj")
+shader_parameter/main_texture = ExtResource("2_rtnkc")

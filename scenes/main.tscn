@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://rrxkg3gsjj5y"]
+
+[ext_resource type="Material" uid="uid://3efo5ivdi8np" path="res://assets/materials/texture_repeat.tres" id="1_4rx1k"]
+[ext_resource type="PackedScene" uid="uid://dapdb6ra2i16a" path="res://scenes/player/player.tscn" id="2_l4w2d"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_87u06"]
+size = Vector2(20, 20)
+
+[node name="Main" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = ExtResource("1_4rx1k")
+mesh = SubResource("PlaneMesh_87u06")
+
+[node name="Player" parent="." instance=ExtResource("2_l4w2d")]

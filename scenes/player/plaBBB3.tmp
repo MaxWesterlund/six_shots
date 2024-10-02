@@ -1,0 +1,51 @@
+[gd_scene load_steps=7 format=3 uid="uid://dapdb6ra2i16a"]
+
+[ext_resource type="Script" path="res://scenes/player/player.gd" id="1_n6iiy"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_cvahj"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_q18ea"]
+size = Vector3(0.1, 0.2, 0.7)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yji5i"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_rpruh"]
+radius = 0.2
+height = 0.4
+
+[sub_resource type="BoxMesh" id="BoxMesh_uf7mi"]
+size = Vector3(0.15, 0.1, 0.5)
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_n6iiy")
+move_speed = 100.0
+camera_move_distance = 1.0
+min_hand_distance = 0.7
+max_hand_distance = 1.2
+
+[node name="Body" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_cvahj")
+
+[node name="Shades" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1.587, -0.45)
+mesh = SubResource("BoxMesh_q18ea")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_yji5i")
+
+[node name="Node" type="Node" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="Node"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 6.20996, 0)
+
+[node name="Hand" type="Node3D" parent="Node"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.7)
+
+[node name="HandMesh" type="MeshInstance3D" parent="Node/Hand"]
+mesh = SubResource("SphereMesh_rpruh")
+
+[node name="GunMesh" type="MeshInstance3D" parent="Node/Hand"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.208783, -0.1946)
+mesh = SubResource("BoxMesh_uf7mi")
