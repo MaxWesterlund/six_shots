@@ -37,6 +37,9 @@ func movement(delta: float):
 	move_vec = move_vec.normalized()
 	
 	velocity = move_speed * delta * move_vec
+	
+	GameInfo.player_position = global_position
+	
 	move_and_slide()
 
 func look_rotation():
@@ -70,4 +73,4 @@ func shoot():
 	if Input.is_action_just_pressed("shoot"):
 		var origin = hand.bullet_origin.global_position
 		var normal = -hand.bullet_origin.global_basis.z
-		GameEvents.handle_shot(get_world_3d().direct_space_state, origin, normal)
+		GameInfo.handle_shot(get_world_3d().direct_space_state, origin, normal)

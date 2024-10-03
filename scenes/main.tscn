@@ -1,17 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://rrxkg3gsjj5y"]
+[gd_scene load_steps=5 format=3 uid="uid://rrxkg3gsjj5y"]
 
 [ext_resource type="Material" uid="uid://3efo5ivdi8np" path="res://assets/materials/texture_repeat.tres" id="1_4rx1k"]
 [ext_resource type="PackedScene" uid="uid://dapdb6ra2i16a" path="res://scenes/player/player.tscn" id="2_l4w2d"]
+[ext_resource type="PackedScene" uid="uid://cj804ghwvrwxs" path="res://scenes/enemy/enemy.tscn" id="3_kt0mi"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_87u06"]
 size = Vector2(20, 20)
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_jun1s"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_02rxa"]
-albedo_color = Color(0.217161, 0.367763, 0.630813, 1)
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_71yf3"]
 
 [node name="Main" type="Node3D"]
 transform = Transform3D(0.999998, -0.0016049, 0.00124556, 0.00160533, 0.999999, -0.000337156, -0.00124501, 0.000339179, 0.999999, 0, 0, 0)
@@ -26,13 +20,5 @@ mesh = SubResource("PlaneMesh_87u06")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.861308, -0.383599, -0.333166, 0.50785, 0.669812, 0.541701, 0.0153629, -0.635771, 0.771725, 0, 0, 0)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
-transform = Transform3D(1, -4.60432e-11, 0, 4.51195e-10, 1, 0, 0, 0, 1, 4.12869, 0.991302, -6.15558)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
-transform = Transform3D(1, -4.60432e-11, 0, 2.18364e-10, 1, 0, 0, 0, 1, 0, 0, 0)
-mesh = SubResource("CapsuleMesh_jun1s")
-surface_material_override/0 = SubResource("StandardMaterial3D_02rxa")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-shape = SubResource("CapsuleShape3D_71yf3")
+[node name="Enemy" parent="." instance=ExtResource("3_kt0mi")]
+transform = Transform3D(1, 7.10543e-11, 1.16415e-10, -1.26761e-11, 1, 0, -1.16415e-10, 2.91038e-11, 1, 3.81268, -0.00718012, -3.14246)

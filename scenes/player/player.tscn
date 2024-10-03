@@ -1,27 +1,36 @@
-[gd_scene load_steps=5 format=3 uid="uid://dapdb6ra2i16a"]
+[gd_scene load_steps=6 format=3 uid="uid://dapdb6ra2i16a"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_n6iiy"]
 [ext_resource type="PackedScene" uid="uid://t8ceu3hpgymv" path="res://scenes/character/body.tscn" id="2_h60j8"]
 [ext_resource type="PackedScene" uid="uid://br0ednlovmkhr" path="res://scenes/character/hand.tscn" id="2_qtvt4"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lv84w"]
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.783387, 0.596298, 0.205293, 1)
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yji5i"]
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_n6iiy")
-move_speed = 100.0
+move_speed = 150.0
 camera_move_distance = 5.0
 min_hand_distance = 0.7
 max_hand_distance = 1.2
 
 [node name="Body" parent="." instance=ExtResource("2_h60j8")]
 
+[node name="BodyMesh" parent="Body" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_lv84w")
+
+[node name="Hand" parent="." instance=ExtResource("2_qtvt4")]
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_yji5i")
-
-[node name="Hand" parent="." instance=ExtResource("2_qtvt4")]
 
 [node name="Node" type="Node" parent="."]
 
 [node name="Camera3D" type="Camera3D" parent="Node"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 6.20996, 0)
+
+[editable path="Body"]

@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://cj804ghwvrwxs"]
+
+[ext_resource type="Script" path="res://scenes/enemy/enemy.gd" id="1_gmy52"]
+[ext_resource type="PackedScene" uid="uid://t8ceu3hpgymv" path="res://scenes/character/body.tscn" id="2_5rcy2"]
+[ext_resource type="PackedScene" uid="uid://br0ednlovmkhr" path="res://scenes/character/hand.tscn" id="3_8ng6j"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7ic0r"]
+albedo_color = Color(0.773403, 0, 0.0333124, 1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_srgk4"]
+
+[node name="Enemy" type="CharacterBody3D"]
+script = ExtResource("1_gmy52")
+move_speed = 130.0
+min_distance_from_player = 3.0
+max_distance_from_player = 5.0
+
+[node name="Body" parent="." instance=ExtResource("2_5rcy2")]
+
+[node name="BodyMesh" parent="Body" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_7ic0r")
+
+[node name="Hand" parent="." instance=ExtResource("3_8ng6j")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_srgk4")
+
+[editable path="Body"]
